@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="container-fluid">
+    <a type="button" id="toCreate" class="btn btn-success" href='create/'>New</a>
+</div>
+<br>
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+      <thead class="thead-dark">
+          <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for item in object_list %}
+            <tr>
+                <td>{{item.name}}</td>
+                <td>R${{item.price}}</td>
+                <td>{{item.description}}</td>
+                <td>
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <a type="button" class="btn btn-danger" href='{% url "itens_namespace:itens_delete" item.id %}'>Delete</a>
+                            <a type="button" class="btn btn-primary" href='{% url "itens_namespace:itens_update" item.id %}'>Update</a>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+{% endblock %}
